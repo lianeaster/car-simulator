@@ -13,9 +13,15 @@ public class StateChecker {
 
     static {
         stateChain = new HashMap<>();
-        stateChain.put(OFF, Collections.singletonList(STANDBY));
+        stateChain.put(OFF,  new ArrayList<CarState>() {
+            {
+                add(OFF);
+                add(STANDBY);
+            }
+        });;
         stateChain.put(STANDBY, new ArrayList<CarState>() {
             {
+                add(STANDBY);
                 add(DRIVE_FORWARD);
                 add(DRIVE_REVERSE);
                 add(OFF);
@@ -23,12 +29,14 @@ public class StateChecker {
         });
         stateChain.put(DRIVE_FORWARD, new ArrayList<CarState>() {
             {
+                add(DRIVE_FORWARD);
                 add(DRIVE_REVERSE);
                 add(STANDBY);
             }
         });
         stateChain.put(DRIVE_REVERSE, new ArrayList<CarState>() {
             {
+                add(DRIVE_REVERSE);
                 add(DRIVE_FORWARD);
                 add(STANDBY);
             }

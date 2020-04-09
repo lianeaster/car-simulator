@@ -1,14 +1,15 @@
 Initial instructions
 ---------------------
-Press such letters to make actions:
+Press such letters to maka actions:
 'o' - to open car lock
 's' - to start engine
-'f' - to press accelerator pedal
+'f' - to increase speed
 'l' - to move left
 'r' - to move right
 'v' - to move back
-'b' - to press brake pedal
-'p' - to stop engine
+'b' - to decrease speed
+'p' - to park
+'t' - to stop engine
 'c' - to lock the car
 'e' - to exit the program
 ---------------------

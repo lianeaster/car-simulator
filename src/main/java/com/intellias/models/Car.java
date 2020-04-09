@@ -35,7 +35,7 @@ public class Car {
             setState(CarState.STANDBY);
             getTransmission().setTState(TransmissionState.DRIVE);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 
     public void increaseSpeed() {
@@ -44,7 +44,7 @@ public class Car {
             log.info(getTransmission().getTState().toString());
             setState(CarState.DRIVE_FORWARD);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 
     public void moveBackward() {
@@ -53,7 +53,7 @@ public class Car {
             getTransmission().setTState(TransmissionState.REVERSE);
             setState(CarState.DRIVE_REVERSE);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 
     public void turnLeft() {
@@ -75,7 +75,7 @@ public class Car {
             log.info(getTransmission().getTState().toString());
             setState(CarState.STANDBY);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 
     public void park() {
@@ -83,7 +83,7 @@ public class Car {
             getTransmission().setTState(TransmissionState.PARKING);
             setState(CarState.DRIVE_REVERSE);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 
     public void lock() {
@@ -102,6 +102,6 @@ public class Car {
             log.info(getTransmission().getTState().toString());
             setState(CarState.OFF);
         } else
-            log.error("You can't do this action for while car is " + carState);
+            log.error("You can't do this action while car is " + carState);
     }
 }
