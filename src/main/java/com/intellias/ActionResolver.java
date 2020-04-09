@@ -14,7 +14,7 @@ public class ActionResolver {
                 car.startEngine();
                 break;
             case 'f':
-                car.moveForward();
+                car.increaseSpeed();
                 break;
             case 'v':
                 car.moveBackward();
@@ -26,9 +26,12 @@ public class ActionResolver {
                 car.turnRight();
                 break;
             case 'b':
-                car.stopMotion();
+                car.decreaseSpeed();
                 break;
             case 'p':
+                car.park();
+                break;
+            case 't':
                 car.stopEngine();
                 break;
             case 'c':

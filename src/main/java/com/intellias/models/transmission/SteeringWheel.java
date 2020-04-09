@@ -1,4 +1,4 @@
-package com.intellias.models;
+package com.intellias.models.transmission;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 public class SteeringWheel {
 
     public void turnLeft() {
-        log.info("Car is moving left");
+        log.info("Car has moved left!");
     }
 
     public void turnRight() {
-        log.info("Car is moving right");
+        log.info("Car has moved right!");
     }
 }

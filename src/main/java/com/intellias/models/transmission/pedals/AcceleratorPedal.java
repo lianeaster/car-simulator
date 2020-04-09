@@ -1,4 +1,4 @@
-package com.intellias.models;
+package com.intellias.models.transmission.pedals;
 
 import lombok.extern.slf4j.Slf4j;
 

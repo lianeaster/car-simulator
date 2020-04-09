@@ -1,4 +1,4 @@
-package com.intellias.models;
+package com.intellias.models.transmission.pedals;
 
 public interface Pedal {
     void pressPedal();

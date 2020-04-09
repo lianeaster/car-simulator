@@ -1,4 +1,4 @@
-package com.intellias.models;
+package com.intellias.models.transmission.pedals;
 
 import lombok.Data;
 
