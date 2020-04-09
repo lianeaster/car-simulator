@@ -8,7 +8,7 @@ public class Transmission {
     private SteeringWheel steeringWheel;
 
     public Transmission() {
-        pedals= new Pedals();
-        steeringWheel= new SteeringWheel();
+        pedals = new Pedals();
+        steeringWheel = new SteeringWheel();
     }
 }

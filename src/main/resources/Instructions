@@ -1,0 +1,13 @@
+Initial instructions
+---------------------
+Press such letters to make actions:
+'o' - to open car lock
+'s' - to start engine
+'f' - to press accelerator pedal
+'l' - to move left
+'r' - to move right
+'v' - to move back
+'b' - to press brake pedal
+'p' - to stop engine
+'c' - to lock the car
+'e' - to exit the program

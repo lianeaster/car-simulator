@@ -7,6 +7,6 @@ public class CarBody {
     private Lock lock;
 
     public CarBody() {
-        lock= new Lock();
+        lock = new Lock();
     }
 }
