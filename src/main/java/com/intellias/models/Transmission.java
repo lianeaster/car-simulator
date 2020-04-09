@@ -6,9 +6,11 @@ import lombok.Data;
 public class Transmission {
     private Pedals pedals;
     private SteeringWheel steeringWheel;
+    private Boolean reverseGear;
 
     public Transmission() {
         pedals = new Pedals();
         steeringWheel = new SteeringWheel();
     }
+
 }

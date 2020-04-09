@@ -1,6 +1,5 @@
 package com.intellias;
 
-import com.intellias.enums.CarState;
 import com.intellias.models.Car;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,15 +12,12 @@ public class ActionResolver {
                 break;
             case 's':
                 car.startEngine();
-                car.setState(CarState.STANDBY);
                 break;
             case 'f':
                 car.moveForward();
-                car.setState(CarState.DRIVE_FORWARD);
                 break;
             case 'v':
                 car.moveBackward();
-                car.setState(CarState.DRIVE_REVERSE);
                 break;
             case 'l':
                 car.turnLeft();
@@ -31,18 +27,18 @@ public class ActionResolver {
                 break;
             case 'b':
                 car.stopMotion();
-                car.setState(CarState.STANDBY);
                 break;
             case 'p':
                 car.stopEngine();
                 break;
             case 'c':
                 car.lock();
-                car.setState(CarState.OFF);
+                break;
+            case 'e':
+                log.info("Program overs it's work. Thanks :)");
                 break;
             default:
                 log.info("Unknown character! Try again!");
-
         }
     }
 }
