@@ -8,9 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CarSimulator {
 
     public static void main(String[] args) {
-        FileUtils.typeFileLineByLine("D:\\car-simulator\\src\\main\\resources\\Instructions");
+        FileUtils.typeFileLineByLine("src\\main\\resources\\Instructions");
         Car car = new Car();
-        log.info("Current car state is: "+car.getCarState().toString());
+        log.info("Initial car state is: "+car.getCarState().toString());
+        log.info("Initial transmission state is: "+car.getTransmission().getTState().toString());
         new ActionListener().listen(car);
     }
 }

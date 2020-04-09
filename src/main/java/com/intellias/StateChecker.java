@@ -9,7 +9,7 @@ import static com.intellias.enums.CarState.OFF;
 import static com.intellias.enums.CarState.STANDBY;
 
 public class StateChecker {
-    public static Map<CarState, List<CarState>> stateChain;
+    private static Map<CarState, List<CarState>> stateChain;
 
     static {
         stateChain = new HashMap<>();
@@ -18,7 +18,7 @@ public class StateChecker {
                 add(OFF);
                 add(STANDBY);
             }
-        });;
+        });
         stateChain.put(STANDBY, new ArrayList<CarState>() {
             {
                 add(STANDBY);

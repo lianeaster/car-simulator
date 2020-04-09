@@ -16,7 +16,7 @@ public class Transmission {
     public Transmission() {
         pedals = new Pedals();
         steeringWheel = new SteeringWheel();
-        setTState(TransmissionState.PARKING);
+        tState=TransmissionState.PARKING;
     }
 
     public void setTState(TransmissionState tState) {

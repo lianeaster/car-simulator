@@ -8,6 +8,8 @@ import com.intellias.models.transmission.Transmission;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import static com.intellias.StateChecker.*;
+
 @Data
 @Slf4j
 public class Car {
@@ -20,88 +22,107 @@ public class Car {
         engine = new Engine();
         carBody = new CarBody();
         transmission = new Transmission();
-        setCarState(CarState.OFF);
+        carState = CarState.OFF;
     }
 
     public void open() {
-        getCarBody().getLock().openLock();
-        log.info(carState.toString());
-        log.info(transmission.getTState().toString());
+        carBody.getLock().openLock();
+        log.info("Car state is: "+carState.toString());
+        log.info("Transmission state is: "+transmission.getTState().toString());
     }
 
     public void startEngine() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.STANDBY)) {
-            getEngine().startEngine();
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.STANDBY))
+                throw new IllegalStateException();
+            engine.startEngine();
             setState(CarState.STANDBY);
-            getTransmission().setTState(TransmissionState.DRIVE);
-        } else
+            transmission.setTState(TransmissionState.DRIVE);
+        } catch (IllegalStateException e) {
             log.error("You can't do this action while car is " + carState);
+        }
     }
 
     public void increaseSpeed() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_FORWARD)) {
-            getTransmission().getPedals().getAccelerator().pressPedal();
-            log.info(getTransmission().getTState().toString());
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.DRIVE_FORWARD))
+                throw new IllegalStateException();
+            transmission.getPedals().getAccelerator().pressPedal();
+            log.info("Transmission state is: "+transmission.getTState().toString());
             setState(CarState.DRIVE_FORWARD);
-        } else
+        } catch (IllegalStateException e) {
             log.error("You can't do this action while car is " + carState);
+        }
     }
 
     public void moveBackward() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE)) {
-            getTransmission().setReverseGear(true);
-            getTransmission().setTState(TransmissionState.REVERSE);
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE))
+                throw new IllegalStateException();
+            transmission.setReverseGear(true);
+            transmission.setTState(TransmissionState.REVERSE);
             setState(CarState.DRIVE_REVERSE);
-        } else
+        } catch (IllegalStateException e) {
             log.error("You can't do this action while car is " + carState);
+        }
     }
 
     public void turnLeft() {
-        getTransmission().getSteeringWheel().turnLeft();
-        log.info(getTransmission().getTState().toString());
-        log.info(carState.toString());
+        transmission.getSteeringWheel().turnLeft();
+        log.info("Transmission state is: "+transmission.getTState().toString());
+        log.info("Car state is: "+carState.toString());
     }
 
     public void turnRight() {
-        getTransmission().getSteeringWheel().turnRight();
-        log.info(getTransmission().getTState().toString());
-        log.info(carState.toString());
+        transmission.getSteeringWheel().turnRight();
+        log.info("Transmission state is: "+transmission.getTState().toString());
+        log.info("Car state is: "+carState.toString());
 
     }
 
     public void decreaseSpeed() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.STANDBY)) {
-            getTransmission().getPedals().getBrake().pressPedal();
-            log.info(getTransmission().getTState().toString());
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.STANDBY))
+                throw new IllegalStateException();
+            transmission.getPedals().getBrake().pressPedal();
+            log.info("Transmission state is: "+transmission.getTState().toString());
             setState(CarState.STANDBY);
-        } else
+        } catch (IllegalStateException e) {
             log.error("You can't do this action while car is " + carState);
+        }
     }
 
     public void park() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE)) {
-            getTransmission().setTState(TransmissionState.PARKING);
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE))
+                throw new IllegalStateException();
+            transmission.setTState(TransmissionState.PARKING);
             setState(CarState.DRIVE_REVERSE);
-        } else
+        } catch (IllegalStateException e) {
             log.error("You can't do this action while car is " + carState);
+        }
     }
 
     public void lock() {
-        getCarBody().getLock().closeLock();
-        log.info(carState.toString());
+        carBody.getLock().closeLock();
+        log.info("Transmission state is: "+transmission.getTState().toString());
+        log.info("Car state is: "+carState.toString());
+    }
+
+    public void stopEngine() {
+        try {
+            if (!checkIfStateIsAllowed(carState, CarState.OFF))
+                throw new IllegalStateException();
+            engine.stopEngine();
+            log.info("Transmission state is: "+transmission.getTState().toString());
+            setState(CarState.OFF);
+        } catch (IllegalStateException e) {
+            log.error("You can't do this action while car is " + carState);
+        }
     }
 
     private void setState(CarState carState) {
         this.carState = carState;
         log.info("Car state is changed to: " + carState.toString());
-    }
-
-    public void stopEngine() {
-        if (StateChecker.checkIfStateIsAllowed(carState, CarState.OFF)) {
-            getEngine().stopEngine();
-            log.info(getTransmission().getTState().toString());
-            setState(CarState.OFF);
-        } else
-            log.error("You can't do this action while car is " + carState);
     }
 }
