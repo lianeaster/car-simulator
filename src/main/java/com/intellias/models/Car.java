@@ -10,13 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 public class Car {
     private Engine engine;
     private CarBody carBody;
-    private Transmission transmisison;
+    private Transmission transmission;
     private CarState carState;
 
     public Car() {
         engine = new Engine();
         carBody = new CarBody();
-        transmisison = new Transmission();
+        transmission = new Transmission();
     }
 
     public void setState(CarState carState) {
@@ -24,7 +24,39 @@ public class Car {
         log.info("Car state is: " + carState.toString());
     }
 
-    public void openLock() {
+    public void open() {
+        getCarBody().getLock().openLock();
+    }
 
+    public void startEngine() {
+        getEngine().startEngine();
+    }
+
+    public void moveForward() {
+        getTransmission().getPedals().getAccelerator().pressPedal();
+    }
+
+    public void moveBackward() {
+        getTransmission().getPedals().getBrake().pressPedal();
+    }
+
+    public void turnLeft() {
+        getTransmission().getSteeringWheel().turnLeft();
+    }
+
+    public void turnRight() {
+        getTransmission().getSteeringWheel().turnRight();
+    }
+
+    public void stopMotion() {
+        getTransmission().getPedals().getBrake().pressPedal();
+    }
+
+    public void stopEngine() {
+        getEngine().stopEngine();
+    }
+
+    public void lock() {
+        getCarBody().getLock().closeLock();
     }
 }

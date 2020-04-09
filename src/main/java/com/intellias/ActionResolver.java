@@ -9,36 +9,35 @@ public class ActionResolver {
     public static void doAction(Car car, char actionName) {
         switch (actionName) {
             case 'o':
-//                car.openLock();
-                car.getCarBody().getLock().openLock();
+                car.open();
                 break;
             case 's':
-                car.getEngine().startEngine();
+                car.startEngine();
                 car.setState(CarState.STANDBY);
                 break;
             case 'f':
-                car.getTransmisison().getPedals().getAccelerator().pressPedal();
+                car.moveForward();
                 car.setState(CarState.DRIVE_FORWARD);
                 break;
             case 'v':
-                car.getTransmisison().getPedals().getAccelerator().pressPedal();
-                car.setState(CarState.DRIVE_FORWARD);
+                car.moveBackward();
+                car.setState(CarState.DRIVE_REVERSE);
                 break;
             case 'l':
-                car.getTransmisison().getSteeringWheel().turnLeft();
+                car.turnLeft();
                 break;
             case 'r':
-                car.getTransmisison().getSteeringWheel().turnRight();
+                car.turnRight();
                 break;
             case 'b':
-                car.getTransmisison().getPedals().getBrake().pressPedal();
+                car.stopMotion();
                 car.setState(CarState.STANDBY);
                 break;
             case 'p':
-                car.getEngine().stopEngine();
+                car.stopEngine();
                 break;
             case 'c':
-                car.getCarBody().getLock().closeLock();
+                car.lock();
                 car.setState(CarState.OFF);
                 break;
             default:
