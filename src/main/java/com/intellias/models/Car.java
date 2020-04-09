@@ -1,6 +1,7 @@
 package com.intellias.models;
 
 
+import com.intellias.StateChecker;
 import com.intellias.enums.CarState;
 import com.intellias.enums.TransmissionState;
 import com.intellias.models.transmission.Transmission;
@@ -29,21 +30,30 @@ public class Car {
     }
 
     public void startEngine() {
-        getEngine().startEngine();
-        getTransmission().setTState(TransmissionState.DRIVE);
-        setState(CarState.STANDBY);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.STANDBY)) {
+            getEngine().startEngine();
+            setState(CarState.STANDBY);
+            getTransmission().setTState(TransmissionState.DRIVE);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 
     public void increaseSpeed() {
-        getTransmission().getPedals().getAccelerator().pressPedal();
-        log.info(getTransmission().getTState().toString());
-        setState(CarState.DRIVE_FORWARD);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_FORWARD)) {
+            getTransmission().getPedals().getAccelerator().pressPedal();
+            log.info(getTransmission().getTState().toString());
+            setState(CarState.DRIVE_FORWARD);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 
     public void moveBackward() {
-        getTransmission().setReverseGear(true);
-        getTransmission().setTState(TransmissionState.REVERSE);
-        setState(CarState.DRIVE_REVERSE);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE)) {
+            getTransmission().setReverseGear(true);
+            getTransmission().setTState(TransmissionState.REVERSE);
+            setState(CarState.DRIVE_REVERSE);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 
     public void turnLeft() {
@@ -60,14 +70,20 @@ public class Car {
     }
 
     public void decreaseSpeed() {
-        getTransmission().getPedals().getBrake().pressPedal();
-        log.info(getTransmission().getTState().toString());
-        setState(CarState.STANDBY);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.STANDBY)) {
+            getTransmission().getPedals().getBrake().pressPedal();
+            log.info(getTransmission().getTState().toString());
+            setState(CarState.STANDBY);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 
     public void park() {
-        getTransmission().setTState(TransmissionState.PARKING);
-        setState(CarState.DRIVE_REVERSE);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.DRIVE_REVERSE)) {
+            getTransmission().setTState(TransmissionState.PARKING);
+            setState(CarState.DRIVE_REVERSE);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 
     public void lock() {
@@ -81,8 +97,11 @@ public class Car {
     }
 
     public void stopEngine() {
-        getEngine().stopEngine();
-        log.info(getTransmission().getTState().toString());
-        setState(CarState.OFF);
+        if (StateChecker.checkIfStateIsAllowed(carState, CarState.OFF)) {
+            getEngine().stopEngine();
+            log.info(getTransmission().getTState().toString());
+            setState(CarState.OFF);
+        } else
+            log.error("You can't do this action for while car is " + carState);
     }
 }
